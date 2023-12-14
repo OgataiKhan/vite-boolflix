@@ -1,4 +1,4 @@
-# VueJS Vite starting template
+# BoolFlix
 
 ```
 npm install
