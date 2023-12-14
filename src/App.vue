@@ -15,11 +15,18 @@ export default {
       store,
     };
   },
+  methods: {
+    search() {
+      axios.get(store.apiURLBase + '&query=' + store.searchKey).then((response) => {
+        store.films = response.data.results;
+      })
+    }
+  },
 };
 </script>
 
 <template>
-  <Header />
+  <Header @searchTrigger="search" />
   <Main />
   <!-- <h1>{{ text }}</h1>
   <p><font-awesome-icon icon="fa-solid fa-star" /></p>
