@@ -19,10 +19,10 @@ export default {
       store,
     };
   },
-  methods: {
-    // This method converts the average score from decimals to fifths, rounding up
-    convertVote(vote) {
-      return Math.ceil(vote / 2);
+  computed: {
+    // This property converts the average score from decimals to fifths, rounding up
+    convertVote() {
+      return Math.ceil(this.vote / 2);
     }
   }
 };
@@ -41,10 +41,10 @@ export default {
         <p><span>Average score: </span>
           <!-- Average score representation with full and empty stars -->
           <ul>
-            <li v-for="i in convertVote(vote)">
+            <li v-for="i in convertVote">
               <font-awesome-icon icon="fa-solid fa-star" />
             </li>
-            <li v-for="i in 5 - convertVote(vote)">
+            <li v-for="i in 5 - convertVote">
               <font-awesome-icon icon="fa-regular fa-star" />
             </li>
           </ul>
