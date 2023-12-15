@@ -3,3 +3,16 @@
 TYPOGRAPHY
 *********
 */
+
+@use './variables' as *;
+
+body {
+  color: $font-primary;
+}
+
+.navbar {
+  color: #ababab;
+  li:hover {
+    color: $font-primary;
+  }
+}
