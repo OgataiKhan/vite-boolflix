@@ -1,7 +1,7 @@
 <script>
 
 export default {
-  name: 'MainFilm',
+  name: 'MainSeries',
   props: {title: String, originaltitle: String, lang: String, vote: Number},
 };
 
