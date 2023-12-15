@@ -9,5 +9,6 @@ export const store = reactive ({
     filmsKeyword: 'movie',
     seriesKeyword: 'tv',
     apiKey: '?api_key=2496cebd18ad416a44cb57ed3238e896',
+    defaultImageURL: 'https://image.tmdb.org/t/p/w342',
   },
 });
