@@ -17,10 +17,21 @@ export default {
   },
   methods: {
     search() {
-      axios.get(store.apiMovieDB.defaultURL + store.apiMovieDB.filmsKeyword + store.apiMovieDB.apiKey + '&query=' + store.searchKey).then((response) => {
+      axios.get(store.apiMovieDB.defaultURL + store.apiMovieDB.filmsKeyword + store.apiMovieDB.apiKey,
+        {
+          params: {
+            query: store.searchKey,
+          }
+        }
+      ).then((response) => {
         store.films = response.data.results;
       });
-      axios.get(store.apiMovieDB.defaultURL + store.apiMovieDB.seriesKeyword + store.apiMovieDB.apiKey + '&query=' + store.searchKey).then((response) => {
+      axios.get(store.apiMovieDB.defaultURL + store.apiMovieDB.seriesKeyword + store.apiMovieDB.apiKey, {
+        params: {
+          query: store.searchKey,
+        }
+      }
+      ).then((response) => {
         store.series = response.data.results;
       });
     },
