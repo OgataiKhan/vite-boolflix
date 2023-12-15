@@ -26,10 +26,10 @@ export default {
       </ul>
     </div>
     <div class="header-right">
-      <form @submit.prevent="$emit('searchTrigger')">
+      <form @submit.prevent="$emit('searchTrigger')" class="search-box">
         <label for="searchbar">Search</label>
         <input type="search" id="searchbar" placeholder="Search" v-model="store.searchKey" />
-        <button type="submit">
+        <button type="submit" class="search-button">
           <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
         </button>
       </form>
@@ -45,38 +45,74 @@ export default {
 
 header {
   display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
 
   .header-left {
     display: flex;
-    padding: 20px 40px;
 
     .logo {
       max-width: 200px;
+      min-width: 100px;
       margin-right: 30px;
+      display: flex;
+      align-items: center;
     }
 
     .navbar {
       display: flex;
       align-items: center;
       gap: 18px;
+
       li {
         padding-top: 10px;
         padding-bottom: 10px;
+
         &:hover {
-        cursor: pointer;
+          cursor: pointer;
+        }
       }
-      }
-      
+
     }
   }
+
   .header-right {
     display: flex;
     align-items: center;
-    label[for="searchbar"] {
-      display: none;
-    }
-    // #searchbar {
+    justify-items: flex-end;
+    width: 30%;
+    min-width: 200px;
+    .search-box {
+      padding-right: 20px;
+      padding-left: 8px;
+      display: flex;
+      width: 100%;
+      label[for="searchbar"] {
+        display: none;
+      }
 
-    // }
+      #searchbar {
+        background-color: #323232;
+        border: none;
+        text-align: center;
+        line-height: 2.5;
+        width: 90%;
+        color: $font-primary;
+        border-top-left-radius: $search-border-radius;
+        border-bottom-left-radius: $search-border-radius;
+        &:focus {
+          outline: none;
+        }
+      }
+      .search-button {
+        padding-left: 10px;
+        padding-right: 10px;
+        background-color: #323232;
+        border: none;
+        cursor: pointer;
+        border-top-right-radius: $search-border-radius;
+        border-bottom-right-radius: $search-border-radius;
+      }
+    }
   }
 }</style>

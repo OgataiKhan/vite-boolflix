@@ -1,4 +1,7 @@
 import { createApp } from 'vue';
+// Google font Roboto
+import "@fontsource/roboto";
+import "@fontsource/roboto/500.css";
 //flag icons css
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 //fontawesome core
