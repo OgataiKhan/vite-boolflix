@@ -7,6 +7,7 @@ export default {
   },
   data() {
     return {
+      // This object converts languages (ISO 639-1) into arguably appropriate flags (ISO 3166-1-alpha-2).
       languageToCountry: {
         "aa": "dj",
         "af": "za",
@@ -175,12 +176,15 @@ export default {
     };
   },
   computed: {
+    // Returns the flag corresponding to a language based on the above object.
     country() {
       return this.languageToCountry[this.languageCode];
     },
+    // Returns the value type of "country".
     isCountryString() {
       return typeof this.country === 'string';
     },
+    // Returns the country code if the language corresponds to a flag/country rather than to an object (in certain unclear cases) or to undefined. Otherwise, returns the language code itself.
     flagCode() {
       return this.isCountryString ? this.country : this.languageCode;
     },

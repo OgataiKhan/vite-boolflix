@@ -16,6 +16,7 @@ export default {
     };
   },
   methods: {
+    // This method represents the api call taking as its arguments the "movie" or "tv" property and the array to which it assigns the fetched data
     makeApiCall(searchKeyword, resultArray) {
       axios.get(`${store.apiMovieDB.defaultURL}${searchKeyword}${store.apiMovieDB.apiKey}`, {
         params: {
@@ -27,7 +28,7 @@ export default {
         console.error(`Error fetching ${resultArray}:`, error);
       });
     },
-
+    // This method inovokes makeApiCall to make the two api calls 
     search() {
       this.makeApiCall(store.apiMovieDB.filmsKeyword, 'films');
       this.makeApiCall(store.apiMovieDB.seriesKeyword, 'series');
@@ -37,6 +38,7 @@ export default {
 </script>
 
 <template>
+  <!-- Api call trigger -->
   <Header @searchTrigger="search" />
   <Main />
 </template>
