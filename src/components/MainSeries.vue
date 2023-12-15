@@ -1,8 +1,17 @@
 <script>
+import LanguageFlag from './LanguageFlag.vue';
 
 export default {
   name: 'MainSeries',
-  props: {title: String, originaltitle: String, lang: String, vote: Number},
+  props: {
+    title: String,
+    originaltitle: String,
+    lang: String,
+    vote: Number
+  },
+  components: {
+    LanguageFlag,
+  },
 };
 
 </script>
@@ -11,7 +20,7 @@ export default {
     <li>
       <h3><span>Title: </span> {{ title }}</h3>
       <h4><span>Original title: </span> {{ originaltitle }}</h4>
-      <p><span>Language: </span> {{ lang }}</p>
+      <p><span>Language: </span> <LanguageFlag :languageCode="lang" /></p>
       <p><span>Average score: </span> {{ vote }}</p>
     </li>
 </template>
