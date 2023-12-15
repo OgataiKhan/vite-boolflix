@@ -16,24 +16,21 @@ export default {
     };
   },
   methods: {
-    search() {
-      axios.get(store.apiMovieDB.defaultURL + store.apiMovieDB.filmsKeyword + store.apiMovieDB.apiKey,
-        {
-          params: {
-            query: store.searchKey,
-          }
-        }
-      ).then((response) => {
-        store.films = response.data.results;
-      });
-      axios.get(store.apiMovieDB.defaultURL + store.apiMovieDB.seriesKeyword + store.apiMovieDB.apiKey, {
+    makeApiCall(searchKeyword, resultArray) {
+      axios.get(`${store.apiMovieDB.defaultURL}${searchKeyword}${store.apiMovieDB.apiKey}`, {
         params: {
           query: store.searchKey,
         }
-      }
-      ).then((response) => {
-        store.series = response.data.results;
+      }).then((response) => {
+        store[resultArray] = response.data.results;
+      }).catch((error) => {
+        console.error(`Error fetching ${resultArray}:`, error);
       });
+    },
+
+    search() {
+      this.makeApiCall(store.apiMovieDB.filmsKeyword, 'films');
+      this.makeApiCall(store.apiMovieDB.seriesKeyword, 'series');
     },
   },
 };
