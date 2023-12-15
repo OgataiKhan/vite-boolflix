@@ -19,6 +19,11 @@ export default {
       store,
     };
   },
+  methods: {
+    convertVote(vote) {
+      return Math.ceil(vote / 2);
+    }
+  }
 };
 
 </script>
@@ -32,7 +37,16 @@ export default {
         <p><span>Language: </span>
           <LanguageFlag :languageCode="lang" />
         </p>
-        <p><span>Average score: </span> {{ vote }}</p>
+        <p><span>Average score: </span>
+          <ul>
+            <li v-for="i in convertVote(vote)">
+              <font-awesome-icon icon="fa-solid fa-star" />
+            </li>
+            <li v-for="i in 5 - convertVote(vote)">
+              <font-awesome-icon icon="fa-regular fa-star" />
+            </li>
+          </ul>
+        </p>
       </div>
       <img v-if="img !== null" :src="store.apiMovieDB.defaultImageURL + img" :alt="title">
       <img v-else src="../assets/img/poster-not-found.png" alt="Poster Not Found">
