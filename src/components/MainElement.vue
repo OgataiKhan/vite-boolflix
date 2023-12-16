@@ -70,10 +70,10 @@ export default {
     }
 
   .media-details {
-    background-color: rgba($color: $primary-color, $alpha: 0.5);
+    background-color: $primary-color;
     padding: 20px 10px;
     overflow-y: auto;
-    // display: none;
+    display: none;
     position: absolute;
     top: 0;
     right: 0;
@@ -100,4 +100,17 @@ export default {
 .missing {
   display: none;
 }
+
+@media screen and (max-width: 1199px) {
+  .card {
+    width: calc((100% - ($card-column-gap * 3)) / 4);;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .card {
+    width: calc((100% - ($card-column-gap * 1)) / 2);;
+  }
+}
+
 </style>
