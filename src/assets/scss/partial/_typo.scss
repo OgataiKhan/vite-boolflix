@@ -8,6 +8,7 @@ TYPOGRAPHY
 
 body {
   color: $font-primary;
+  font-size: .875rem;
 }
 
 .navbar {
@@ -19,4 +20,8 @@ body {
 
 .search-button {
   color: #ababab;
+}
+
+.star-list li {
+  color: #ffd500;
 }
