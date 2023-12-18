@@ -9,6 +9,7 @@ export default {
     title: String,
     type: String,
     id: Number,
+    genreIds: Array,
     originaltitle: String,
     lang: String,
     vote: Number,
@@ -80,7 +81,7 @@ export default {
 </script>
 
 <template>
-  <li class="card">
+  <li v-if="genreIds.includes(store[`${type}SelectedGenre`]) || store[`${type}SelectedGenre`] === ''" class="card">
     <div class="poster-box">
       <div class="media-img" :class="{ cardborder: img === null }">
         <img v-if="img !== null" :src="store.apiMovieDB.defaultImageURL + img" :alt="title">
