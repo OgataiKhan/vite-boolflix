@@ -33,6 +33,8 @@ export default {
     search() {
       this.makeApiCall(store.apiMovieDB.filmsKeyword, 'films');
       this.makeApiCall(store.apiMovieDB.seriesKeyword, 'series');
+      store.movieSelectedGenre = '';
+      store.tvSelectedGenre = '';
     },
     makeGenresCall(type, genresArray) {
       axios.get(`${store.apiMovieDB.defaultURL}genre/${type}/list`, {

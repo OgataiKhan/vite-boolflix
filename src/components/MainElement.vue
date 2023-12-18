@@ -10,7 +10,7 @@ export default {
     type: String,
     id: Number,
     genreIds: Array,
-    originaltitle: String,
+    originalTitle: String,
     lang: String,
     vote: Number,
     overview: String,
@@ -61,14 +61,18 @@ export default {
         this.genres = data;
       });;
     },
-    // This method handles clicking on the "Show more" button, triggering the API call if the relevant arrays are empty and only toggling visibility if they are not
+    // This method handles clicking on the "Show more" button, triggering the API call if the relevant arrays are empty and only toggling visibility if they are not. The "else if" is there to handle the case of movies/series with no genres or cast members in the data.
     handleMoreClick() {
-      if (this.cast.length === 0 && this.genres.length === 0) {
+      if (this.cast.length === 0 && this.genres.length === 0 && !this.chevronOpen) {
         this.searchCast();
         this.searchGenres();
         this.castVisible = true;
         this.genresVisible = true;
         this.chevronOpen = true;
+      } else if (this.cast.length === 0 && this.genres.length === 0 && this.chevronOpen) {
+        this.castVisible = false;
+        this.genresVisible = false;
+        this.chevronOpen = false;
       } else {
         this.castVisible = !this.castVisible;
         this.genresVisible = !this.genresVisible;
@@ -83,18 +87,24 @@ export default {
 <template>
   <li v-if="genreIds.includes(store[`${type}SelectedGenre`]) || store[`${type}SelectedGenre`] === ''" class="card">
     <div class="poster-box">
+      <!-- Poster -->
       <div class="media-img" :class="{ cardborder: img === null }">
         <img v-if="img !== null" :src="store.apiMovieDB.defaultImageURL + img" :alt="title">
         <img v-else src="../assets/img/poster-not-found.png" alt="Poster Not Found">
       </div>
+      <!-- /Poster -->
+      <!-- Flipcard backside -->
       <div class="media-details">
+        <!-- Title -->
         <h3><span class="data-title">Title: </span> {{ title }}</h3>
-        <h4><span class="data-title">Original title: </span> {{ originaltitle }}</h4>
+        <!-- Original title -->
+        <h4 v-if="title !== originalTitle"><span class="data-title">Original title: </span> {{ originalTitle }}</h4>
+        <!-- Language flag -->
         <p><span class="data-title">Language: </span>
           <LanguageFlag :languageCode="lang" />
         </p>
+        <!-- Average score representation with full and empty stars -->
         <p><span class="data-title">Average score: </span>
-          <!-- Average score representation with full and empty stars -->
         <ul class="star-list">
           <li v-for="i in convertVote">
             <font-awesome-icon icon="fa-solid fa-star" />
@@ -103,11 +113,12 @@ export default {
             <font-awesome-icon icon="fa-regular fa-star" />
           </li>
         </ul>
-        <!-- /Average score representation with full and empty stars -->
         </p>
+        <!-- Overview -->
         <p :class="{ missing: overview === '' }"><span class="data-title">Overview: </span> {{ overview }}</p>
         <!-- Additional details -->
-        <p @click="handleMoreClick" class="data-title clickable">Show more <font-awesome-icon v-if="!chevronOpen" icon="fa-solid fa-chevron-down" /><font-awesome-icon v-if="chevronOpen" icon="fa-solid fa-chevron-up" /></p>
+        <p @click="handleMoreClick" class="data-title clickable">Show more <font-awesome-icon v-if="!chevronOpen"
+            icon="fa-solid fa-chevron-down" /><font-awesome-icon v-if="chevronOpen" icon="fa-solid fa-chevron-up" /></p>
         <p v-if="castVisible">
           <span class="data-title">Cast: </span>
           <span v-for="(actor, index) in cast">
@@ -117,11 +128,13 @@ export default {
         <p v-if="genresVisible">
           <span class="data-title">Genres: </span>
           <span v-for="(genre, index) in genres">
-            {{ genre.name }}<span v-if="index < genres.length - 1">, </span>
+            {{ genre.name }}
+            <span v-if="index < genres.length - 1">, </span>
           </span>
         </p>
         <!-- /Additional details -->
       </div>
+      <!-- /Flipcard backside -->
     </div>
   </li>
 </template>

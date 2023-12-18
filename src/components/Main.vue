@@ -27,7 +27,7 @@ export default {
         <h2>Movies</h2>
         <GenreSelector :type="'movie'" />
         <ul class="media-list">
-          <MainElement v-for="film in store.films" :title="film.title" :type="'movie'" :id="film.id" :genreIds="film.genre_ids" :originaltitle="film.original_title" :lang="film.original_language" :vote="film.vote_average"
+          <MainElement v-for="film in store.films" :title="film.title" :type="'movie'" :id="film.id" :genreIds="film.genre_ids" :originalTitle="film.original_title" :lang="film.original_language" :vote="film.vote_average"
             :overview="film.overview" :img="film.poster_path" />
         </ul>
       </div>
@@ -36,7 +36,7 @@ export default {
         <h2>TV Shows</h2>
         <GenreSelector :type="'tv'" />
         <ul class="media-list">
-          <MainElement v-for="series in store.series" :title="series.name" :type="'tv'" :id="series.id" :genreIds="series.genre_ids" :originaltitle="series.original_name" :lang="series.original_language" :vote="series.vote_average"
+          <MainElement v-for="series in store.series" :title="series.name" :type="'tv'" :id="series.id" :genreIds="series.genre_ids" :originalTitle="series.original_name" :lang="series.original_language" :vote="series.vote_average"
             :overview="series.overview" :img="series.poster_path" />
         </ul>
       </div>

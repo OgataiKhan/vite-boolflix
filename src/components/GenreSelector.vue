@@ -17,8 +17,7 @@ export default {
 
 <template>
   <label :for="`${type}-genre-selector`">Choose a genre:</label>
-  <select name="genre" :id="`${type}-genre-selector`" v-model="store[`${type}SelectedGenre`]"
-    @change="$emit(`${type}GenreSelection`)">
+  <select name="genre" :id="`${type}-genre-selector`" v-model="store[`${type}SelectedGenre`]">
     <option selected value="">Select Genre...</option>
     <option v-for="genre in store[`${type}Genres`]" :value="genre.id">{{ genre.name }}
     </option>
