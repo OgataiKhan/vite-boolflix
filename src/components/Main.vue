@@ -24,6 +24,14 @@ export default {
 <template>
   <main>
     <div class="container">
+      <div class="homepage">
+      <!-- Homepage with popular films -->
+      <h2>Popular Movies</h2>
+      <ul class="media-list">
+          <MainElement v-for="film in store.popularFilms" :title="film.title" :type="'movie'" :id="film.id" :genreIds="film.genre_ids" :originalTitle="film.original_title" :lang="film.original_language" :vote="film.vote_average"
+            :overview="film.overview" :img="film.poster_path" />
+        </ul>
+      </div>
       <div class="movies">
         <!-- Film list -->
         <h2>Movies</h2>

@@ -2,12 +2,16 @@ import { reactive } from 'vue';
 
 export const store = reactive({
   searchKey: '',
+  popularFilms: [],
   films: [],
   series: [],
   movieGenres: [],
   tvGenres: [],
   movieSelectedGenre: '',
   tvSelectedGenre: '',
+  movieVisible: false,
+  tvVisible: false,
+  homeVisible: true,
   filmsNoResults: false,
   seriesNoResults: false,
   apiMovieDB: {

@@ -32,7 +32,7 @@ export default {
         console.error(`Error fetching ${resultArray}:`, error);
       });
     },
-    // This method resets any extant "no results" messages and inovokes makeApiCall to make the two api calls
+    // This method resets any extant "no results" messages and inovokes makeApiCall to make the two api calls. It automatically displays the movie results by default.
     search() {
       store.filmsNoResults = false;
       store.seriesNoResults = false;
@@ -40,7 +40,12 @@ export default {
       this.makeApiCall(store.apiMovieDB.seriesKeyword, 'series');
       store.movieSelectedGenre = '';
       store.tvSelectedGenre = '';
+      // Display movie results
+      store.movieVisible = true;
+      store.tvVisible = false;
+      store.homeVisible = false;
     },
+    // This method fetches a list of movie/tv genres for the genre selector
     makeGenresCall(type, genresArray) {
       axios.get(`${store.apiMovieDB.defaultURL}genre/${type}/list`, {
         params: {
@@ -51,11 +56,28 @@ export default {
       }).catch((error) => {
         console.error(`Error fetching ${resultArray}:`, error);
       });
-    }
+    },
+    makePopularMoviesCall() {
+      axios.get(`${store.apiMovieDB.defaultURL}discover/movie`, {
+        params: {
+          api_key: store.apiMovieDB.apiKey,
+          include_adult: 'false',
+          include_video: 'false',
+          language: 'en-US',
+          page: '1',
+          sort_by: 'popularity.desc',
+        }
+      }).then((response) => {
+        store.popularFilms = response.data.results;
+      }).catch((error) => {
+        console.error(`Error fetching popular movies:`, error);
+      });
+    },
   },
   created() {
     this.makeGenresCall('movie', 'movieGenres');
     this.makeGenresCall('tv', 'tvGenres');
+    this.makePopularMoviesCall();
   },
 };
 </script>
