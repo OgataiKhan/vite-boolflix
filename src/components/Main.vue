@@ -21,7 +21,7 @@ export default {
   <main>
     <div class="container">
       <!-- Film list -->
-      <h2>Film</h2>
+      <h2>Movies</h2>
       <ul class="media-list">
         <MainElement v-for="film in store.films" :title="film.title" :originaltitle="film.original_title"
           :lang="film.original_language" :vote="film.vote_average" :overview="film.overview" :img="film.poster_path" />
@@ -45,6 +45,12 @@ main {
 
   .container {
     @include container;
+    h2 {
+      padding: 50px 0 30px;
+      &:first-child {
+        padding-top: 0;
+      }
+    }
     .media-list {
       display: flex;
       flex-wrap: wrap;
