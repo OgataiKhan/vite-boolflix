@@ -1,6 +1,6 @@
 import { reactive } from 'vue';
 
-export const store = reactive ({
+export const store = reactive({
   searchKey: '',
   films: [],
   series: [],
@@ -8,6 +8,8 @@ export const store = reactive ({
   tvGenres: [],
   movieSelectedGenre: '',
   tvSelectedGenre: '',
+  filmsNoResults: false,
+  seriesNoResults: false,
   apiMovieDB: {
     defaultURL: 'https://api.themoviedb.org/3/',
     search: 'search/',

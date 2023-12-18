@@ -16,7 +16,7 @@ export default {
     };
   },
   methods: {
-    // This method represents the api call taking as its arguments the "movie" or "tv" property and the array to which it assigns the fetched data
+    // This method represents the api call taking as its arguments the "movie" or "tv" property and the array to which it assigns the fetched data. It also displays a relevant message if the search returns no results.
     makeApiCall(searchKeyword, resultArray) {
       axios.get(`${store.apiMovieDB.defaultURL}${store.apiMovieDB.search}${searchKeyword}`, {
         params: {
@@ -25,12 +25,17 @@ export default {
         }
       }).then((response) => {
         store[resultArray] = response.data.results;
+        if (store[resultArray].length === 0) {
+          store[`${resultArray}NoResults`] = true;
+        }
       }).catch((error) => {
         console.error(`Error fetching ${resultArray}:`, error);
       });
     },
-    // This method inovokes makeApiCall to make the two api calls 
+    // This method resets any extant "no results" messages and inovokes makeApiCall to make the two api calls
     search() {
+      store.filmsNoResults = false;
+      store.seriesNoResults = false;
       this.makeApiCall(store.apiMovieDB.filmsKeyword, 'films');
       this.makeApiCall(store.apiMovieDB.seriesKeyword, 'series');
       store.movieSelectedGenre = '';
