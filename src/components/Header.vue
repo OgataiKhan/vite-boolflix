@@ -7,6 +7,7 @@ export default {
   data() {
     return {
       store,
+      notificationsActive: true,
     };
   },
   methods: {
@@ -48,8 +49,9 @@ export default {
             <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
           </button>
         </form>
-        <div class="notifications">
-          <font-awesome-icon icon="fa-solid fa-bell" />
+        <div @click="notificationsActive = !notificationsActive" class="notifications">
+          <font-awesome-icon v-if="notificationsActive" icon="fa-solid fa-bell" />
+          <font-awesome-icon v-if="!notificationsActive" icon="fa-solid fa-bell-slash" />
         </div>
       </div>
     </div>
@@ -146,6 +148,10 @@ header {
 
       .notifications {
         cursor: pointer;
+        width: 18px;
+        display: flex;
+        justify-content: center;
+        flex-shrink: 0;
       }
     }
   }
