@@ -31,6 +31,7 @@ export default {
 <template>
   <header>
     <div class="container">
+      <!-- Logo & Navbar -->
       <div class="header-left">
         <div @click="this.clickHome" class="logo">
           <img src="/public/img/boolflix-logo.webp" alt="Boolflix logo">
@@ -41,6 +42,8 @@ export default {
           <li @click="this.clickTv" :class="{ highlighted: store.page === 'tv' }">TV Shows</li>
         </ul>
       </div>
+      <!-- /Logo & Navbar -->
+      <!-- Searchbar & Notifications -->
       <div class="header-right">
         <form @submit.prevent="$emit('searchTrigger')" class="search-box">
           <label for="searchbar">Search</label>
@@ -54,6 +57,7 @@ export default {
           <font-awesome-icon v-if="!notificationsActive" icon="fa-solid fa-bell-slash" />
         </div>
       </div>
+      <!-- /Searchbar & Notifications -->
     </div>
 
   </header>

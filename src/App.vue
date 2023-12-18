@@ -34,14 +34,14 @@ export default {
     },
     // This method resets any extant "no results" messages and inovokes makeApiCall to make the two api calls. It automatically displays the movie results by default.
     search() {
-      store.filmsNoResults = false;
-      store.seriesNoResults = false;
-      this.makeApiCall(store.apiMovieDB.filmsKeyword, 'films');
-      this.makeApiCall(store.apiMovieDB.seriesKeyword, 'series');
-      store.movieSelectedGenre = '';
-      store.tvSelectedGenre = '';
-      // Display movie results
-      store.page = 'movie';
+      if (store.searchKey.trim() !== '') {
+        store.filmsNoResults = false;
+        store.seriesNoResults = false;
+        this.makeApiCall(store.apiMovieDB.filmsKeyword, 'films');
+        this.makeApiCall(store.apiMovieDB.seriesKeyword, 'series');
+        // Display movie results
+        store.page = 'movie';
+      }
     },
     // This method fetches a list of movie/tv genres for the genre selector
     makeGenresCall(type, genresArray) {
