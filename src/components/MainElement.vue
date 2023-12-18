@@ -31,10 +31,12 @@ export default {
 </script>
 
 <template>
-  <li class="card" :class="{ cardborder: img === null }">
+  <li class="card">
     <div class="poster-box">
-      <img v-if="img !== null" :src="store.apiMovieDB.defaultImageURL + img" :alt="title">
-      <img v-else src="../assets/img/poster-not-found.png" alt="Poster Not Found">
+      <div class="media-img" :class="{ cardborder: img === null }">
+        <img v-if="img !== null" :src="store.apiMovieDB.defaultImageURL + img" :alt="title">
+        <img v-else src="../assets/img/poster-not-found.png" alt="Poster Not Found">
+      </div>
       <div class="media-details">
         <h3><span class="data-title">Title: </span> {{ title }}</h3>
         <h4><span class="data-title">Original title: </span> {{ originaltitle }}</h4>
@@ -63,60 +65,80 @@ export default {
 
 .card {
   width: calc((100% - ($card-column-gap * 5)) / 6);
-  position: relative;
+  height: 24vw;
   font-weight: 400;
-  &:hover .media-details {
-      display: block;
-    }
+  perspective: 1000px;
+
+  &:hover .poster-box {
+    transform: rotateY(180deg);
+  }
+
   .poster-box {
     height: 100%;
-    img {
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+
+    .media-img,
+    .media-details {
+      position: absolute;
+      width: 100%;
       height: 100%;
-      object-fit: cover;
+      -webkit-backface-visibility: hidden; // Safari
+      backface-visibility: hidden;
+
+      img {
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
+
   .media-details {
     background-color: $primary-color;
     padding: 20px 10px;
     overflow-y: auto;
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    h3, h4 {
+    transform: rotateY(180deg);
+
+    h3,
+    h4 {
       font-weight: 400;
       font-size: .875rem;
     }
+
     .star-list {
       display: inline-block;
+
       li {
         display: inline-block;
       }
     }
+
     .data-title {
       font-weight: 700;
     }
   }
 }
+
 .cardborder {
   border: 1px solid darkgray;
 }
+
 .missing {
   display: none;
 }
 
 @media screen and (max-width: 1199px) {
   .card {
-    width: calc((100% - ($card-column-gap * 3)) / 4);;
+    width: calc((100% - ($card-column-gap * 3)) / 4);
+    height: 35vw;
   }
 }
 
 @media screen and (max-width: 767px) {
   .card {
-    width: calc((100% - ($card-column-gap * 1)) / 2);;
+    width: calc((100% - ($card-column-gap * 1)) / 2);
+    height: 68vw;
   }
 }
-
 </style>
