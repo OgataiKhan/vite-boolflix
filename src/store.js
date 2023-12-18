@@ -8,7 +8,7 @@ export const store = reactive ({
     defaultURL: 'https://api.themoviedb.org/3/search/',
     filmsKeyword: 'movie',
     seriesKeyword: 'tv',
-    apiKey: '?api_key=2496cebd18ad416a44cb57ed3238e896',
+    apiKey: '2496cebd18ad416a44cb57ed3238e896',
     defaultImageURL: 'https://image.tmdb.org/t/p/w342',
   },
 });
