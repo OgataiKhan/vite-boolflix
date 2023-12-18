@@ -68,7 +68,13 @@ export default {
   &:hover .media-details {
       display: block;
     }
-
+  .poster-box {
+    height: 100%;
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
   .media-details {
     background-color: $primary-color;
     padding: 20px 10px;
