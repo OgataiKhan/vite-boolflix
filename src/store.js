@@ -9,9 +9,7 @@ export const store = reactive({
   tvGenres: [],
   movieSelectedGenre: '',
   tvSelectedGenre: '',
-  movieVisible: false,
-  tvVisible: false,
-  homeVisible: true,
+  page: 'home',
   filmsNoResults: false,
   seriesNoResults: false,
   apiMovieDB: {

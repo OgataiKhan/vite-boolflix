@@ -9,6 +9,20 @@ export default {
       store,
     };
   },
+  methods: {
+    // These three methods serve to change page (Home, Movies, Tv Shows) when clicking the appropriate menu item
+    clickHome() {
+      store.page = 'home';
+      store.movieSelectedGenre = '';
+      store.tvSelectedGenre = '';
+    },
+    clickMovie() {
+      store.page = 'movie';
+    },
+    clickTv() {
+      store.page = 'tv';
+    },
+  },
 };
 
 </script>
@@ -17,13 +31,13 @@ export default {
   <header>
     <div class="container">
       <div class="header-left">
-        <div class="logo">
+        <div @click="this.clickHome" class="logo">
           <img src="/public/img/boolflix-logo.webp" alt="Boolflix logo">
         </div>
         <ul class="navbar">
-          <li>Home</li>
-          <li>TV Shows</li>
-          <li>Movies</li>
+          <li @click="this.clickHome" :class="{ highlighted: store.page === 'home' }">Home</li>
+          <li @click="this.clickMovie" :class="{ highlighted: store.page === 'movie' }">Movies</li>
+          <li @click="this.clickTv" :class="{ highlighted: store.page === 'tv' }">TV Shows</li>
         </ul>
       </div>
       <div class="header-right">
@@ -65,6 +79,7 @@ header {
         margin-right: 30px;
         display: flex;
         align-items: center;
+        cursor: pointer;
       }
 
       .navbar {
@@ -80,7 +95,9 @@ header {
             cursor: pointer;
           }
         }
-
+        li.highlighted {
+          color: $font-primary;
+        }
       }
     }
 

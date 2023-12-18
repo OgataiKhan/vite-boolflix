@@ -24,7 +24,7 @@ export default {
 <template>
   <main>
     <div class="container">
-      <div class="homepage">
+      <div v-if="store.page === 'home'" class="homepage">
       <!-- Homepage with popular films -->
       <h2>Popular Movies</h2>
       <ul class="media-list">
@@ -32,7 +32,7 @@ export default {
             :overview="film.overview" :img="film.poster_path" />
         </ul>
       </div>
-      <div class="movies">
+      <div v-if="store.page === 'movie'" class="movies">
         <!-- Film list -->
         <h2>Movies</h2>
         <GenreSelector :type="'movie'" />
@@ -42,7 +42,7 @@ export default {
             :overview="film.overview" :img="film.poster_path" />
         </ul>
       </div>
-      <div class="series">
+      <div v-if="store.page === 'tv'" class="series">
         <!-- TV shows list -->
         <h2>TV Shows</h2>
         <GenreSelector :type="'tv'" />

@@ -41,9 +41,7 @@ export default {
       store.movieSelectedGenre = '';
       store.tvSelectedGenre = '';
       // Display movie results
-      store.movieVisible = true;
-      store.tvVisible = false;
-      store.homeVisible = false;
+      store.page = 'movie';
     },
     // This method fetches a list of movie/tv genres for the genre selector
     makeGenresCall(type, genresArray) {
