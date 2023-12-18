@@ -18,7 +18,7 @@ export default {
   methods: {
     // This method represents the api call taking as its arguments the "movie" or "tv" property and the array to which it assigns the fetched data
     makeApiCall(searchKeyword, resultArray) {
-      axios.get(`${store.apiMovieDB.defaultURL}${searchKeyword}`, {
+      axios.get(`${store.apiMovieDB.defaultURL}${store.apiMovieDB.search}${searchKeyword}`, {
         params: {
           api_key: store.apiMovieDB.apiKey,
           query: store.searchKey,

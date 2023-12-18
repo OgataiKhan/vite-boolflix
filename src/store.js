@@ -5,7 +5,8 @@ export const store = reactive ({
   films: [],
   series: [],
   apiMovieDB: {
-    defaultURL: 'https://api.themoviedb.org/3/search/',
+    defaultURL: 'https://api.themoviedb.org/3/',
+    search: 'search/',
     filmsKeyword: 'movie',
     seriesKeyword: 'tv',
     apiKey: '2496cebd18ad416a44cb57ed3238e896',

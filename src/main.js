@@ -9,7 +9,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 //fontawesome icon component
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 //fontawesome import specific icons
-import { faStar, faMagnifyingGlass, faBell } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faMagnifyingGlass, faBell, faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarReg } from '@fortawesome/free-regular-svg-icons';
 //file di partenza stili progetto
 import './assets/scss/style.scss';
@@ -17,6 +17,6 @@ import './assets/scss/style.scss';
 import App from './App.vue';
 
 //fontawesome add icons to library
-library.add(faStar, faStarReg, faMagnifyingGlass, faBell);
+library.add(faStar, faStarReg, faMagnifyingGlass, faBell, faChevronUp, faChevronDown);
 
 createApp(App).component('font-awesome-icon', FontAwesomeIcon).mount('#app');

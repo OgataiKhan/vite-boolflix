@@ -1,4 +1,5 @@
 <script>
+import axios from 'axios';
 import { store } from '../store';
 import LanguageFlag from './LanguageFlag.vue';
 
@@ -6,6 +7,8 @@ export default {
   name: 'MainElement',
   props: {
     title: String,
+    type: String,
+    id: Number,
     originaltitle: String,
     lang: String,
     vote: Number,
@@ -18,6 +21,12 @@ export default {
   data() {
     return {
       store,
+      showDetails: false,
+      cast: [],
+      genres: [],
+      castVisible: false,
+      genresVisible: false,
+      chevronOpen: false,
     };
   },
   computed: {
@@ -25,7 +34,47 @@ export default {
     convertVote() {
       return Math.ceil(this.vote / 2);
     }
-  }
+  },
+  methods: {
+    // This method represents the API call that can fetch the first five cast members and genres of a given movie or tv series
+    makeDetailsApiCall(mediaType, resultKey, targetData) {
+      return axios.get(`${store.apiMovieDB.defaultURL}${mediaType}/${this.id}${resultKey}`, {
+        params: {
+          api_key: store.apiMovieDB.apiKey,
+        }
+      }).then((response) => {
+        return response.data[targetData].slice(0, 5);;
+      }).catch((error) => {
+        console.error(`Error fetching data:`, error);
+      });
+    },
+    // This method executes the API call above targetting cast members and saves the results in the relevant variable
+    searchCast() {
+      this.makeDetailsApiCall(this.type, '/credits', 'cast').then(data => {
+        this.cast = data;
+      });;
+    },
+    // This method executes the API call above targetting genres and saves the results in the relevant variable 
+    searchGenres() {
+      this.makeDetailsApiCall(this.type, '', 'genres').then(data => {
+        this.genres = data;
+      });;
+    },
+    // This method handles clicking on the "Show more" button, triggering the API call if the relevant arrays are empty and only toggling visibility if they are not
+    handleMoreClick() {
+      if (this.cast.length === 0 && this.genres.length === 0) {
+        this.searchCast();
+        this.searchGenres();
+        this.castVisible = true;
+        this.genresVisible = true;
+        this.chevronOpen = true;
+      } else {
+        this.castVisible = !this.castVisible;
+        this.genresVisible = !this.genresVisible;
+        this.chevronOpen = !this.chevronOpen;
+      }
+    }
+  },
 };
 
 </script>
@@ -53,8 +102,24 @@ export default {
             <font-awesome-icon icon="fa-regular fa-star" />
           </li>
         </ul>
+        <!-- /Average score representation with full and empty stars -->
         </p>
         <p :class="{ missing: overview === '' }"><span class="data-title">Overview: </span> {{ overview }}</p>
+        <!-- Additional details -->
+        <p @click="handleMoreClick" class="data-title clickable">Show more <font-awesome-icon v-if="!chevronOpen" icon="fa-solid fa-chevron-down" /><font-awesome-icon v-if="chevronOpen" icon="fa-solid fa-chevron-up" /></p>
+        <p v-if="castVisible">
+          <span class="data-title">Cast: </span>
+          <span v-for="(actor, index) in cast">
+            {{ actor.name }}<span v-if="index < cast.length - 1">, </span>
+          </span>
+        </p>
+        <p v-if="genresVisible">
+          <span class="data-title">Genres: </span>
+          <span v-for="(genre, index) in genres">
+            {{ genre.name }}<span v-if="index < genres.length - 1">, </span>
+          </span>
+        </p>
+        <!-- /Additional details -->
       </div>
     </div>
   </li>
@@ -118,6 +183,10 @@ export default {
       font-weight: 700;
     }
   }
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 .cardborder {
