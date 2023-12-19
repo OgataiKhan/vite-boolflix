@@ -5,7 +5,7 @@ You'll need to install the packages in package.json to be able to use it.
 
 ## Features
 
-- The basic functionality of the app is being able to search among the movies and TV shows from "The Movie DB" api.
+- The basic functionality of the app is being able to search among the movies and TV shows from "The Movie DB" API.
 
 ![Basic Search](./public/img/readme-img/basic-search.png)
 
