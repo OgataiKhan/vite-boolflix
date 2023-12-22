@@ -5,7 +5,7 @@ import Header from './components/Header.vue';
 import Main from './components/Main.vue';
 
 export default {
-  name: 'DefaultTemplate',
+  name: 'BoolFlix',
   components: {
     Header,
     Main,
@@ -55,6 +55,7 @@ export default {
         console.error(`Error fetching ${resultArray}:`, error);
       });
     },
+    // This method fetches a list of popular movies for the home page
     makePopularMoviesCall() {
       axios.get(`${store.apiMovieDB.defaultURL}discover/movie`, {
         params: {
